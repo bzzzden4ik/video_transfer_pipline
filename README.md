@@ -8,7 +8,7 @@ Here is a **brief guide** about this tool.
 
 ## What is it?
 
-VTP lets developer link ML-model (that precess some media-files) and certainly media files.
+VTP lets developer link ML-model (that process some media-files) and certainly media files.
 
 For example one developer started media flow that saves in some directory. You need to get these media files and put them into your model. It takes some time to process media file. That's why all of new files will insert into queue. When model will return some result, next task will start as soon as it possible.
 
@@ -25,7 +25,7 @@ The configuration file is available at the path "./config/config.cfg" by default
 
 * _path_ - global path to directory [../assets/]
 * _fileName_ - first part of files [name...]
-* _fileCounter_ - secont part of files [...01]
+* _fileCounter_ - separation of filename and its counter [..._...]
 * _fileSize_ - size of detected files in KB [262144] or [nothing] to look for all files
 * _checkDelay_ - delay between observation in seconds [600]
 
@@ -36,8 +36,8 @@ Cfg example:
 path=./videos/
 # file prefix
 fileName=video
-# file suffix
-fileCounter=00000
+# file separator
+fileCounter=_
 # file size to find
 fileSize=10
 # delay
