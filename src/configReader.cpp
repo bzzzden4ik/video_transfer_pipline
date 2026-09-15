@@ -3,7 +3,7 @@
 std::pair<std::string, std::string> splitParams(const std::string& param) {
     size_t divider_index = param.find('=', 0);
     if (divider_index == std::string::npos) {
-        throw std::invalid_argument("Wrong config parameter recieved. Take a look in README.md.");
+        throw std::invalid_argument("[System] Wrong config parameter recieved. Take a look in README.md.");
     }
     std::string param_key = param.substr(0, divider_index);
     std::string param_value = param.substr(divider_index + 1);
@@ -30,7 +30,7 @@ void readConfig (Config& config) {
         } else if (splited_params.first == "checkDelay") {
             config.check_delay = std::stoi(splited_params.second);
         } else {
-            throw std::invalid_argument("Wrong cfg parameter recieved: " + splited_params.first);
+            throw std::invalid_argument("[System] Wrong cfg parameter recieved: " + splited_params.first);
         }
     }
 }

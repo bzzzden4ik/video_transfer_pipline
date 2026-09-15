@@ -6,5 +6,5 @@ void timerObservation (bool& isRunning, Config& config, std::unordered_map<std::
         std::this_thread::sleep_for(std::chrono::seconds(config.check_delay));
         lookForNewFiles(config, files, tasks_queue, files_mutex, queue_mutex);
     }
-    std::cout << "Timer Thread just finished.\n";
+    std::cout << "[System] Timer Thread just finished.\n";
 }

@@ -10,7 +10,5 @@
 // Fake execution
 void executeProgram(const std::string& path_name, bool& result_var);
 
-// Task finder
-void lookForTask(std::queue<std::string>& tasks_queue, std::mutex& queue_mutex);
 
 void taskObservation(bool& isRunning, std::queue<std::string>& tasks_queue, std::mutex& queue_mutex);

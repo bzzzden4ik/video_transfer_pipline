@@ -18,14 +18,14 @@ void taskObservation(bool& isRunning, std::queue<std::string>& tasks_queue, std:
             std::string current_task = tasks_queue.front();
             tasks_queue.pop();
             queue_mutex.unlock();
-            std::cout << "Task \"" << current_task << "\" started\n";
+            std::cout << "[Task] \"" << current_task << "\" started\n";
             executeProgram(current_task, result);
-            std::cout << "Task \"" << current_task << "\" finished\n";
+            std::cout << "[Task] \"" << current_task << "\" finished\n";
         } else {
             queue_mutex.unlock();
-            std::cout << "There is no task yet.\n";
+            std::cout << "[Task] There is no task yet.\n";
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    std::cout << "Task Thread just finished.\n";
+    std::cout << "[System] Task Thread just finished.\n";
 }
