@@ -11,19 +11,25 @@ void executeProgram(const std::string& path_name, bool& result_var) {
 }
 
 void taskObservation(bool& isRunning, std::queue<std::string>& tasks_queue, std::mutex& queue_mutex) {
+    std::cout << "[System] Task Thread just started.\n";
+    bool isTask = true;
     while (isRunning) {
         bool result;
         queue_mutex.lock();
         if (!tasks_queue.empty()) {
+            isTask = true;
             std::string current_task = tasks_queue.front();
             tasks_queue.pop();
             queue_mutex.unlock();
-            std::cout << "[Task] \"" << current_task << "\" started\n";
+            std::cout << "[Task] \"" << current_task << "\" | Starting\n";
             executeProgram(current_task, result);
-            std::cout << "[Task] \"" << current_task << "\" finished\n";
+            std::cout << "[Task] \"" << current_task << "\" | Finished\n";
         } else {
             queue_mutex.unlock();
-            std::cout << "[Task] There is no task yet.\n";
+            if (isTask) {
+                std::cout << "[Task] Queue is empty.\n";
+                isTask = false;
+            }
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }

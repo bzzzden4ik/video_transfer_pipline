@@ -15,5 +15,3 @@ std::pair<std::string, std::string> splitParams(const std::string& param);
  * @param config  Config structure that has main fileds
  **/
 void readConfig (Config& config);
-
-// void readConfig (std::string& path_name, std::string& file_name, std::string& file_counter, unsigned& check_delay, unsigned& file_size);
