@@ -1,4 +1,4 @@
-## VTP | Video Transfer Pipeline
+## VTP | Video Transport Pipeline
 
 This tool lets you orginize simple pipeline of transport media files from exact directory to your built ML-model.
 
