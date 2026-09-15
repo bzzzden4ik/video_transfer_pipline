@@ -17,18 +17,23 @@ void fileFinderInit (const Config& config, std::unordered_map<std::string, bool>
     }
 }
 
-void lookForNewFiles (const Config& config, std::unordered_map<std::string, bool>& files, std::queue<std::string>& tasks_queue) {
+void lookForNewFiles (const Config& config, std::unordered_map<std::string, bool>& files, std::queue<std::string>& tasks_queue, std::mutex& files_mutex, std::mutex& queue_mutex) {
     std::string full_path = config.path_name;
     size_t file_name_size = config.file_name.size();
     for (const auto& entry : std::filesystem::directory_iterator(full_path)) {
         auto name = entry.path().filename();
+        files_mutex.lock();
         if (files.contains(name.string())) {
+            files_mutex.unlock();
             continue;
         }
         if (entry.is_regular_file() && name.extension().string() == ".mp4" && name.string().substr(0, file_name_size + 1) == config.file_name + config.file_counter) {
             files[name.string()] = true;
+            queue_mutex.lock();
             tasks_queue.push(name.string());
             std::cout << name << " just appeared and added to queue.\n";
+            queue_mutex.unlock();
         }
+        files_mutex.unlock();
     }
 }

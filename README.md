@@ -47,7 +47,7 @@ checkDelay=5
 ## Build
 **gcc** or **g++** compilers are available
 ```C++
-g++ ./src/*.cpp ./app/* -o /build/vtp
+g++ ./src/*.cpp ./app/* -std=c++20 -o ./build/vtp
 ```
 
 ## Run
