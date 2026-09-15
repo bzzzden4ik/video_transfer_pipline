@@ -51,7 +51,7 @@ g++ ./src/*.cpp ./app/* -std=c++20 -o ./build/vtp
 ```
 
 ## Run
-**Warning! Don't forget to use paths relative to directory where you execure program**
+**Warning! Don't forget to use paths relative to directory where you run program**
 ```bash
 ./build/vtp
 ```

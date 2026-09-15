@@ -10,17 +10,16 @@ void executeProgram(const std::string& path_name, bool& result_var) {
     result_var = result;
 }
 
-void lookForTask(std::queue<std::string>& tasks_queue, std::mutex& queue_mutex) {
-    bool result;
-    while (true) {
+void taskObservation(bool& isRunning, std::queue<std::string>& tasks_queue, std::mutex& queue_mutex) {
+    while (isRunning) {
+        bool result;
         queue_mutex.lock();
         if (!tasks_queue.empty()) {
             std::string current_task = tasks_queue.front();
             tasks_queue.pop();
             queue_mutex.unlock();
             std::cout << "Task \"" << current_task << "\" started\n";
-            std::thread execution_thread(executeProgram, std::ref(current_task), std::ref(result));
-            execution_thread.join();
+            executeProgram(current_task, result);
             std::cout << "Task \"" << current_task << "\" finished\n";
         } else {
             queue_mutex.unlock();
@@ -28,4 +27,5 @@ void lookForTask(std::queue<std::string>& tasks_queue, std::mutex& queue_mutex) 
         }
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
+    std::cout << "Task Thread just finished.\n";
 }
